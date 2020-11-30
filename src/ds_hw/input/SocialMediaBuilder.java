@@ -8,9 +8,16 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class SocialMediaBuilder {
-    SocialMedia result = new SocialMedia();
+    private final Scanner scanner;
+    private SocialMedia result;
 
-    public SocialMedia build(Scanner scanner) {
+    public SocialMediaBuilder(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+
+    public SocialMedia build() {
+        result = new SocialMedia();
         getTopicNames(scanner);
         getTopicRelation(scanner);
         getPersonRelation(scanner);

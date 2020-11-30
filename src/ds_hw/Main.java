@@ -16,8 +16,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int socialMediaNumber = scanner.nextInt();
         LList<SocialMedia> socialMediaList = new LList<>();
+        SocialMediaBuilder socialMediaBuilder = new SocialMediaBuilder(scanner);
         for (int i = 0; i < socialMediaNumber; i++) {
-            socialMediaList.addLast(new SocialMediaBuilder().build(scanner));
+            socialMediaList.addLast(socialMediaBuilder.build());
         }
         SocialMedia socialMedia = socialMediaList.first();
         SocialMediaMerger merger = new SocialMediaMerger();
@@ -26,8 +27,11 @@ public class Main {
         int questionNumbers = scanner.nextInt();
         socialMedia.sort();
         for (int i = 0; i < questionNumbers; i++) {
-            LList<Answer> answers = new QuestionSolver(socialMedia, scanner).solve();
-            for (Answer answer : answers) out.println(answer);
+            QuestionSolver questionSolver = new QuestionSolver(socialMedia, scanner);
+            LList<Answer> answers = questionSolver.solve();
+            for (Answer answer : answers) {
+                out.println(answer);
+            }
         }
         out.flush();
     }
