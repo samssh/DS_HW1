@@ -7,6 +7,7 @@ import ds_hw.model.Relation;
 import ds_hw.model.SocialMedia;
 
 import java.util.Comparator;
+import java.util.function.BinaryOperator;
 
 public class SocialMediaMerger {
     public SocialMedia mergeSocialMedia(SocialMedia sm1, SocialMedia sm2) {
@@ -28,7 +29,7 @@ public class SocialMediaMerger {
         return new Relation(tr1.name, tr1.rate + tr2.rate);
     }
 
-    private <T> LList<T> mergeList(LList<T> l1, LList<T> l2, Comparator<T> comparator, Merger<T> merger) {
+    private <T> LList<T> mergeList(LList<T> l1, LList<T> l2, Comparator<T> comparator, BinaryOperator<T> merger) {
         LList<T> result = new LList<>();
         result.addAll(l1);
         result.addAll(l2);
@@ -38,7 +39,7 @@ public class SocialMediaMerger {
             T now = i.next();
             if (last != null && comparator.compare(now, last) == 0) {
                 i.remove();
-                i.set(merger.merge(now, last));
+                i.set(merger.apply(now, last));
             }
             last = now;
         }
