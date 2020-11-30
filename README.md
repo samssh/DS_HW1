@@ -1,2 +1,2 @@
 # DS_HW1
-assignment for data structure about Sparse matrix
+assignment for data structure course about Sparse matrix
